@@ -10,8 +10,13 @@ export class ShoppingEditComponent {
 
   public ingredient?:Ingredient = {name: '', amount: 0}
   @Output() sendIngrendient:EventEmitter<Ingredient> = new EventEmitter<Ingredient>
+  @Output() clearIngredients:EventEmitter<Ingredient> = new EventEmitter<Ingredient>
+
 
   public onAddIngredient() {
     this.sendIngrendient.emit(this.ingredient);
+  }
+  public onClearIngredient(){
+    this.clearIngredients.emit();
   }
 }

@@ -18,4 +18,7 @@ export class ShoppingListComponent {
   public addIngredient(ingredient:Ingredient){
     this.ingredients.push(ingredient)
   }
+  public clearIngredients(){
+    this.ingredients = []
+  }
 }
