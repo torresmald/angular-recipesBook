@@ -1,21 +1,26 @@
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form [formGroup]="ingredientForm" (ngSubmit)="onSubmit($event)">
       <div class="row">
         <div class="col-sm-5 from-group">
           <label for="name"> Name </label>
-          <input type="text" id="name" class="form-control" [(ngModel)]="ingredient.name" [ngModelOptions]="{standalone: true}"/>
+          <input type="text" id="name" class="form-control" formControlName="name" required/>
+          <p class="error" *ngIf="ingredientForm.get('name').hasError('required') && ingredientForm.get('name').touched">The Name is required</p>
         </div>
         <div class="col-sm-2 form-group">
           <label for="amount">Amount</label>
-          <input type="number" class="form-control" id="amount" [(ngModel)]="ingredient.amount" [ngModelOptions]="{standalone: true}"/>
+          <input type="number" class="form-control" id="amount" formControlName="amount" required/>
+          <p class="error" *ngIf="ingredientForm.get('amount').hasError('required') && ingredientForm.get('amount').touched">The Amount is required</p>
+          <p class="error" *ngIf="ingredientForm.get('amount').hasError('min') && ingredientForm.get('amount').touched">The Minimun Amount is 0</p>
+          <p class="error" *ngIf="ingredientForm.get('amount').hasError('max') && ingredientForm.get('amount').touched">The Maximun Amount is 20</p>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-            <button class="btn btn-success" type="button" (click)="onAddIngredient()">Add</button>
-            <button class="btn btn-danger" type="button">Delete</button>
-            <button class="btn btn-primary" type="button" (click)="onClearIngredients()">Clear</button>
+            <button class="btn btn-success" [disabled]="!ingredientForm.valid" type="submit" (click)="onSubmit('Add')">{{textSendForm}}</button>
+            <button class="btn btn-danger"  [disabled]="ingredients.length === 0" type="button" (click)="onSubmit('Delete')">Delete</button>
+            <button class="btn btn-primary" [disabled]="ingredients.length === 0" type="button" (click)="onSubmit('Clear')">Clear</button>
+            <button class="btn btn-danger" [disabled]="ingredients.length === 0" type="button" (click)="onSubmit('DeleteAll')">Delete All</button>
         </div>
       </div>
     </form>

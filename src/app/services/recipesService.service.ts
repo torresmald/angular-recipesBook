@@ -1,8 +1,10 @@
 import { EventEmitter } from '@angular/core';
 import { Recipe } from '../recipes/recipe-list/recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
+import { Subject } from 'rxjs';
 
 export class recipesService {
+
   private recipes: Recipe[] = [
     new Recipe(
       'Pizza',
@@ -32,6 +34,10 @@ export class recipesService {
     return this.recipes;
   }
   public getRecipe(id: number) {
-    return this.recipes[id]
+    return this.recipes[id];
+  }
+
+  public addRecipe(recipe:Recipe){
+    this.recipes.push(recipe);
   }
 }

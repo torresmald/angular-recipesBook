@@ -15,6 +15,11 @@ export class RecipeItemComponent implements OnInit {
 
   ngOnInit(): void {
       this.recipe = this.recipesService.getRecipe(this.index)
+      console.log(this.recipe.imagePath);
+      
+      // this.recipesService.recipesChanged.subscribe((recipe) => 
+      //   console.log(recipe)
+      // )
   }
   
 }
