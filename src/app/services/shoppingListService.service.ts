@@ -1,10 +1,10 @@
+import { Observable, Subject } from 'rxjs';
 import { Ingredient } from '../shared/ingredient.model';
-import {EventEmitter} from '@angular/core'
 
 
 export class shoppingListService {
 
-  public deletedIngredients:EventEmitter<Ingredient[]> = new EventEmitter<Ingredient[]>()
+  public deletedIngredients:Subject<Ingredient[]> = new Subject<Ingredient[]>()
 
   private ingredients: Ingredient[] = [
     new Ingredient('Apples', 4),
@@ -21,10 +21,12 @@ export class shoppingListService {
 
   public clearIngredients () {
     const clearAllIngredients = this.ingredients.splice(0)
-    this.deletedIngredients.emit(clearAllIngredients)
+    this.deletedIngredients.next(clearAllIngredients)
   }
 
   public addToShoppingList(ingredients: Ingredient[]) {
+    console.log(ingredients);
+    
     this.ingredients.push(...ingredients);
   }
 }

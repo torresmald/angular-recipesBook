@@ -14,13 +14,13 @@
             <button class="btn btn-primary dropdown-toogle" type="button">Manage Recipe <span class="caret"></span></button>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="#" (click)="onAddToShoppingList(ingredients)">Add Shopping List</a>
+                    <a style="cursor: pointer;" (ingredientsArray)="onAddToShoppingList($event)">Add Shopping List</a>
                 </li>
                 <li>
-                    <a href="#">Edit Recipe</a>
+                    <a style="cursor: pointer;" [routerLink]="['edit']">Edit Recipe</a>
                 </li>
                 <li>
-                    <a href="#">Delete Recipe</a>
+                    <a style="cursor: pointer;">Delete Recipe</a>
                 </li>
             </ul>
         </div>
@@ -31,12 +31,12 @@
         Description: {{recipe?.description}}
     </div>
 </div>
-<div class="row">
+<div class="row" *ngIf="recipe">
     <div class="col-xs-12">
         <ul class="list-group">
             <li class="list-group-item flex" *ngFor="let ingredient of recipe.ingredients">
                 {{ingredient.name}} ({{ingredient.amount}}uds)
-                <buton class="btn btn-success" (click)="selectedIgredient(ingredient)">Add</buton>
+                <app-button-ingredient [ingredient]="ingredient" (ingredientsArray)="onAddToShoppingList($event)"></app-button-ingredient>
             </li>
         </ul>
     </div>
